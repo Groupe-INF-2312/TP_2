@@ -1,0 +1,101 @@
+# TP_2
+TP du jeudi 25 septembre
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *prev;
+    struct Node *next;
+} Node;
+
+Node* create_node(int value) {
+    Node *n = (Node*)malloc(sizeof(Node));
+    if (!n) {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+    n->data = value;
+    n->prev = n->next = NULL;
+    return n;
+}
+
+/* Insert node into doubly linked list so that list remains sorted ascending */
+void insert_sorted(Node **head_ref, int value) {
+    Node *newn = create_node(value);
+    Node *head = *head_ref;
+
+    /* If list empty */
+    if (head == NULL) {
+        *head_ref = newn;
+        return;
+    }
+
+    /* Insert before head (new smallest) */
+    if (value <= head->data) {
+        newn->next = head;
+        head->prev = newn;
+        *head_ref = newn;
+        return;
+    }
+
+    /* Find insertion point */
+    Node *cur = head;
+    while (cur->next != NULL && cur->next->data < value) {
+        cur = cur->next;
+    }
+
+    /* Insert after cur */
+    newn->next = cur->next;
+    newn->prev = cur;
+    if (cur->next)
+        cur->next->prev = newn;
+    cur->next = newn;
+}
+
+void print_forward(Node *head) {
+    Node *cur = head;
+    printf("forward: ");
+    while (cur) {
+        printf("%d ", cur->data);
+        cur = cur->next;
+    }
+    printf("\n");
+}
+
+void print_backward(Node *head) {
+    if (!head) { printf("backward: (empty)\n"); return; }
+    Node *cur = head;
+    while (cur->next) cur = cur->next;
+    printf("backward: ");
+    while (cur) {
+        printf("%d ", cur->data);
+        cur = cur->prev;
+    }
+    printf("\n");
+}
+
+void free_list(Node *head) {
+    Node *cur = head;
+    while (cur) {
+        Node *tmp = cur->next;
+        free(cur);
+        cur = tmp;
+    }
+}
+
+/* Demo usage */
+int main(void) {
+    Node *head = NULL;
+
+    int arr[] = {5, 3, 9, 1, 7, 3};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    for (int i = 0; i < n; ++i) {
+        insert_sorted(&head, arr[i]);
+        print_forward(head);
+    }
+
+    print_backward(head);
+    free_list(head);
+    return 0;
+}
