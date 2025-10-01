@@ -5,26 +5,10 @@ typedef struct Node {
     int data;
     struct Node *next;
 } Node;
-
-// Création d’un nouveau nœud
-Node* createNode(int val) {
-    Node* n = (Node*) malloc(sizeof(Node));
-    n->data = val;
-    n->next = NULL;
-    return n;
-}
-
-// Affichage de la liste
-void afficherListe(Node *head) {
-    Node *tmp = head;
-    while(tmp != NULL) {
-        printf("%d -> ", tmp->data);
-        tmp = tmp->next;
-    }
-    printf("NULL\n");
-}
-
-// Suppression des occurrences
+Node* createNode(int val);
+void afficherListe(Node *head);
+
+//Ex1:Lire un Ã©lÃ©ment et supprimer toutes les occurence dans la liste
 Node* supprimerOcc(Node *head, int x) {
     Node *tmp = head, *prec = NULL;
     while(tmp != NULL) {
@@ -49,7 +33,7 @@ int main() {
     Node *head = NULL, *last = NULL;
     int n, val, x;
 
-    printf("Nombre d’elements : ");
+    printf("Nombre dâ€™elements : ");
     scanf("%d", &n);
 
     for(int i=0; i<n; i++) {
@@ -74,3 +58,21 @@ int main() {
 
     return 0;
 }
+// CrÃ©ation dâ€™un nouveau nÅ“ud
+Node* createNode(int val) {
+    Node* n = (Node*) malloc(sizeof(Node));
+    n->data = val;
+    n->next = NULL;
+    return n;
+}
+
+// Affichage de la liste
+void afficherListe(Node *head) {
+    Node *tmp = head;
+    while(tmp != NULL) {
+        printf("%d -> ", tmp->data);
+        tmp = tmp->next;
+    }
+    printf("NULL\n");
+}
+
