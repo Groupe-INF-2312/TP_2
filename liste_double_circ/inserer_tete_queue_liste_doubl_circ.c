@@ -6,15 +6,11 @@ struct cellule {
     struct cellule* next;
     struct cellule* prev;
 };
+struct cellule* createcellule(int info);
+void AfficherListe(struct cellule* head);
 
-struct cellule* createcellule(int info) {
-    struct cellule* newcellule = (struct cellule*)malloc(sizeof(struct cellule));
-    newcellule->info = info;
-    newcellule->next = newcellule;
-    newcellule->prev = newcellule;
-    return newcellule;
-}
-
+//EX5: Insertion en tête et en queue dans une liste doublement chaîne circulaire 
+
 //Fonction pour inserer un élément en tete de liste
 void AjoutEntete(struct cellule** head_ref, int info) {
     struct cellule* newcellule = createcellule(info);
@@ -49,22 +45,7 @@ void AjoutEnQueue(struct cellule** head_ref, int info) {
     (*head_ref)->prev = newcellule;
 }
 
-//Fonction pour afficher la liste
-void AfficherListe(struct cellule* head) {
-    if (head == NULL) {
-        printf("La liste est vide.\n");
-        return;
-    }
 
-    struct cellule* current = head;
-    printf("Etat de la liste : Tete -> ");
-    do {
-        printf("%d <-> ", current->info);
-        current = current->next;
-    } while (current != head);
-
-    printf(" (retour a la tete %d)\n", head->info);
-}
 
 //Menu principal
 int main() {
@@ -123,5 +104,27 @@ int main() {
 
     return 0;
 }
+struct cellule* createcellule(int info) {
+    struct cellule* newcellule = (struct cellule*)malloc(sizeof(struct cellule));
+    newcellule->info = info;
+    newcellule->next = newcellule;
+    newcellule->prev = newcellule;
+    return newcellule;
+}
+//Fonction pour afficher la liste
+void AfficherListe(struct cellule* head) {
+    if (head == NULL) {
+        printf("La liste est vide.\n");
+        return;
+    }
 
+    struct cellule* current = head;
+    printf("Etat de la liste : Tete -> ");
+    do {
+        printf("%d <-> ", current->info);
+        current = current->next;
+    } while (current != head);
+
+    printf(" (retour a la tete %d)\n", head->info);
+}
 
