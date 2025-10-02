@@ -3,7 +3,7 @@
 
 typedef struct neoud {
     int info;
-    struct neoud *next;
+   struct neoud *next;
 } cell,*liste;
 liste newlist();
 void afficher(liste);
