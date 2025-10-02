@@ -7,8 +7,9 @@ typedef struct Node {
 } Node;
 Node* createNode(int val);
 void afficherListe(Node *head);
-
-//Ex1:Lire un élément et supprimer toutes les occurence dans la liste
+
+
+//Exercice 1:Lire un élément et supprimer toutes les occurence dans la liste
 Node* supprimerOcc(Node *head, int x) {
     Node *tmp = head, *prec = NULL;
     while(tmp != NULL) {
@@ -75,4 +76,5 @@ void afficherListe(Node *head) {
     }
     printf("NULL\n");
 }
+
 
