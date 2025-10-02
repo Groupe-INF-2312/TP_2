@@ -70,3 +70,7 @@ liste inslist(int v) {
     tmp->next=NULL;
     return tmp;
 }
+
+
+
+
