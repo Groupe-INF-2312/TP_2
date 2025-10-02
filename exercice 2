@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct neoud {
+    int info;
+    struct neoud *next;
+} cell,*liste;
+liste newlist();
+void afficher(liste);
+liste inslist(int);
+liste inslist_tete(int,liste);
+void trilist(liste l);
+liste insertsorted(int,liste);
+
+//Ex 2:Insertion d'un élément dans une liste simplement chaîne trié
+liste insertsorted(int v, liste tete) {
+    cell *tmp=inslist(v);
+    if(tete==NULL || v<tete->info) {
+        tmp->next=tete;
+        tete=tmp;
+        return tete;
+    }
+    cell *cou=tete;
+    while(cou->next!=NULL && cou->next->info<v) {
+        cou=cou->next;
+    }
+    tmp->next=cou->next;
+    cou->next=tmp;
+    return tete;
+}
+
+int main() {
+    liste l;
+    l=newlist();
+    int choix,v,n,i=0;
+    printf("Entrer le nombre d element(s): ");
+    scanf("%d",&n);
+    printf("Entrer le(s) elemet(s):\n");
+    while(i<n) {
+        scanf("%d",&v);
+        //l=inslist_tete(v,l);
+        l=insertsorted(v,l);
+        afficher(l);
+        i++;
+    }
+
+    return 0;
+}
+
+liste newlist() {
+    return NULL;
+}
+
+void afficher(liste l) {
+    if(l==NULL) {
+        printf("Liste est vide!\n");
+        return;
+    }
+    printf("Liste:");
+    while(l!=NULL) {
+        printf("%d-> ",l->info);
+        l=l->next;
+    }
+    printf("NULL\n");
+}
+
+liste inslist(int v) {
+    cell *tmp=(liste)malloc(sizeof(cell));
+    tmp->info=v;
+    tmp->next=NULL;
+    return tmp;
+}
