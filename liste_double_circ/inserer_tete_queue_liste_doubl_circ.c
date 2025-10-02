@@ -9,8 +9,10 @@ struct cellule {
 struct cellule* createcellule(int info);
 void AfficherListe(struct cellule* head);
 
-//EX5: Insertion en tête et en queue dans une liste doublement chaîne circulaire 
-
+//Exercice5: Insertion en tête et en queue dans une liste doublement chaîne circulaire 
+
+
+
 //Fonction pour inserer un élément en tete de liste
 void AjoutEntete(struct cellule** head_ref, int info) {
     struct cellule* newcellule = createcellule(info);
@@ -127,4 +129,5 @@ void AfficherListe(struct cellule* head) {
 
     printf(" (retour a la tete %d)\n", head->info);
 }
+
 
